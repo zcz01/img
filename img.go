@@ -14,7 +14,7 @@ import (
 	bmp "golang.org/x/image/bmp"
 )
 
-/// gray
+/// ToGray
 func ToGray(AImage image.Image) *image.Gray {
 	bounds := AImage.Bounds()
 	reGray := image.NewGray(bounds)
@@ -26,7 +26,7 @@ func ToGray(AImage image.Image) *image.Gray {
 	return reGray
 }
 
-/// block
+/// ToBlock
 func ToBlock(AGray *image.Gray) *image.Gray {
 	bounds := AGray.Bounds()
 	reGray := image.NewGray(bounds)
@@ -45,7 +45,7 @@ func ToBlock(AGray *image.Gray) *image.Gray {
 	return reGray
 }
 
-/// Halftone
+/// ToHalftone
 func ToHalftone(AGray *image.Gray) *image.Gray {
 	bounds := AGray.Bounds()
 	reGray := image.NewGray(bounds)
@@ -85,13 +85,13 @@ func gray2(y uint8, t int) color.Gray {
 }
 
 /// open
-func Open(image_file string) (Image image.Image, err error) {
-	f, err := os.Open(image_file)
+func Open(AImageFile string) (Image image.Image, err error) {
+	f, err := os.Open(AImageFile)
 	if err != nil {
 		return nil, err
 	}
 	defer f.Close()
-	ext := strings.ToLower(filepath.Ext(image_file))
+	ext := strings.ToLower(filepath.Ext(AImageFile))
 	if "jpg" == ext || "jpeg" == ext {
 		Image, err = jpeg.Decode(f)
 	} else if "png" == ext {
@@ -106,8 +106,9 @@ func Open(image_file string) (Image image.Image, err error) {
 	return
 }
 
-func SavePNG(AImage image.Image, save_file string) error {
-	f, err := os.Create(save_file)
+/// SavePNG
+func SavePNG(AImage image.Image, ASaveFile string) error {
+	f, err := os.Create(ASaveFile)
 	if err != nil {
 		return err
 	}
@@ -119,8 +120,9 @@ func SavePNG(AImage image.Image, save_file string) error {
 	return nil
 }
 
-func SaveJPG(AImage image.Image, save_file string) error {
-	f, err := os.Create(save_file)
+/// SaveJPG
+func SaveJPG(AImage image.Image, ASaveFile string) error {
+	f, err := os.Create(ASaveFile)
 	if err != nil {
 		return err
 	}
@@ -132,8 +134,9 @@ func SaveJPG(AImage image.Image, save_file string) error {
 	return nil
 }
 
-func SaveBMP(AImage image.Image, save_file string) error {
-	f, err := os.Create(save_file)
+/// SaveBMP
+func SaveBMP(AImage image.Image, ASaveFile string) error {
+	f, err := os.Create(ASaveFile)
 	if err != nil {
 		return err
 	}
