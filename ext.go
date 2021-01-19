@@ -16,10 +16,4 @@ func Resize(AImage image.Image, NewWidth, NewHeight float64) image.Image {
 	return resize.Resize(uint(width*ratio), uint(height*ratio), AImage, resize.Lanczos3)
 }
 
-/// ToFaxGray
-func ToFaxGray(AImage image.Image) *image.Gray {
-	m0 := Resize(AImage, 1720, 2280)
-	m1 := ToGray(m0)
-	m2 := ToHalftone(m1)
-	return m2
-}
+ 
